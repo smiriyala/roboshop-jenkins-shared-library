@@ -1,17 +1,17 @@
 def call() {
-    pipeline{
+    pipeline {
         agent any
 
-        stages{
+        stages {
 
             stage('Init'){
-                steps{
+                steps {
                     sh 'terraform init -backend-config=env-dev/state.tfvars'
                 }
             }
         
             stage('Apply'){
-                steps{
+                steps {
                     sh 'terraform apply -auto-approve -var-file=env-dev/main.tfvars'
                 }
             }
