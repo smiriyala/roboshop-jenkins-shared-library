@@ -7,13 +7,17 @@ def call() {
         stages {
             stage('Compile/Build') {
                 steps {
-                    echo "Compile/Build"
+                    script{
+                        common.compile()
+                    }
                 }
             }
 
             stage('Test Execution') {
                 steps {
-                    echo "Test Cases"
+                    script{
+                        common.testcases()
+                    }
                 }
             }
         }
