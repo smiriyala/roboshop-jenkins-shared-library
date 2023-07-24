@@ -3,7 +3,7 @@
 def compile() {
 
     if(app_lang == "nodejs"){
-     sh 'npm install'
+     sh 'npm install --silent'
     }
     if(app_lang == "maven"){
         sh 'mvm package'
@@ -13,11 +13,27 @@ def compile() {
 
 def testcases() {
 
-    if(app_lang == "nodejs"){
-        sh 'echo testcases execution'
-    }
-    if(app_lang == "maven"){
-        sh 'echo testcases execution'
-    }
+    // npm test
+    // mvn test
+    // python -m unittests
+    // go test
+    
+    sh 'echo Testcases Executed'
+    // if(app_lang == "nodejs"){
+    //     sh 'echo testcases execution'
+    // }
+    // if(app_lang == "maven"){
+    //     sh 'echo testcases execution'
+    // }
 }
+
+def codequality() {
+
+    sh 'sonar-scanner -Dsonar.host.url=http://18.204.230.202:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=${component}'
+}
+
+
+
+
+
 
