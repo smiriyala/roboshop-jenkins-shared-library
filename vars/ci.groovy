@@ -11,6 +11,7 @@ def call() {
         stages {
             stage('Compile/Build') {
                 steps {
+                    sh 'env'
                     script{
                         common.compile()
                     }
