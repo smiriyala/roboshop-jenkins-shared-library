@@ -3,7 +3,7 @@
 def compile() {
 
     if(app_lang == "nodejs"){
-     sh 'npm config set fund false && npm install'
+     sh 'npm install --no-fund'
     }
     if(app_lang == "maven"){
         sh 'mvn package'
