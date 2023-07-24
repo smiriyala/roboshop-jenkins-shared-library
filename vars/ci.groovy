@@ -13,6 +13,7 @@ def call() {
                 steps {
                     sh 'env'
                     script{
+
                         common.compile()
                     }
                 }
