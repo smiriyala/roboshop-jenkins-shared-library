@@ -6,7 +6,7 @@ def compile() {
      sh 'npm install'
     }
     if(app_lang == "maven"){
-        sh 'mvm package'
+        sh 'mvn package'
     }
 }
 
