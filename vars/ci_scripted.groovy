@@ -11,7 +11,7 @@ def call() {
                 git branch: 'main' , url: 'https://github.com/smiriyala/cart'
             }
             if (evn.BRANCH_NAME != "main" ) {
-                stage('Compile/Build'){
+                stage('Compile/Build') {
                     sh 'env'
                     common.compile()
                 }
