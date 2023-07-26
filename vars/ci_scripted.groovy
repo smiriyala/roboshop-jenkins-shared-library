@@ -6,19 +6,19 @@ def call() {
 
     node('workstation') {
         try{
-            stage('Checkout Code'){
+            stage('Checkout Code') {
                 cleanWs()
                 git branch: 'main' , url: 'https://github.com/smiriyala/cart'
             }
-            if (evn.BRANCH_NAME != "main"){
+            if (evn.BRANCH_NAME != "main" ) {
                 stage('Compile/Build'){
                     sh 'env'
-                    ommon.compile()
+                    common.compile()
                 }
             }
              
 
-            stage('Test Execution') {
+            stage 'Test Execution') {
                 common.testcases()
             }
 
