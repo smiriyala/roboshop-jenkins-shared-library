@@ -8,11 +8,11 @@ def call() {
         try{
             stage('Checkout Code') {
                 cleanWs()
-                git branch: 'main' , url: 'https://github.com/smiriyala/cart'
+                git branch: 'staging' , url: 'https://github.com/smiriyala/cart'
             }
+
             if (evn.BRANCH_NAME != "staging") {
                 stage('Compile/Build') {
-                    sh 'env'
                     common.compile()
                 }
             }
