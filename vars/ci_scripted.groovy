@@ -10,7 +10,7 @@ def call() {
                 cleanWs()
                 git branch: 'main' , url: 'https://github.com/smiriyala/cart'
             }
-            if (evn.BRANCH_NAME != "main" ) {
+            if (evn.BRANCH_NAME != "staging") {
                 stage('Compile/Build') {
                     sh 'env'
                     common.compile()
