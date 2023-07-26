@@ -8,10 +8,10 @@ def call() {
         try{
             stage('Checkout Code') {
                 cleanWs()
-                git branch: 'staging' , url: 'https://github.com/smiriyala/cart'
+                git branch: 'main' , url: 'https://github.com/smiriyala/cart'
             }
 
-            if (env.BRANCH_NAME != "staging") {
+            if (env.BRANCH_NAME != "main") {
                 stage('Compile/Build') {
                     common.compile()
                 }
