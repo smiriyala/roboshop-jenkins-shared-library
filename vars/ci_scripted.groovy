@@ -11,14 +11,12 @@ def call() {
                 git branch: 'staging' , url: 'https://github.com/smiriyala/cart'
             }
 
-            stage('Compile/Build') {
-                if (env.BRANCH_NAME != "staging") {
-                        common.compile()
-                    }
+            if (env.BRANCH_NAME != "staging") {
+                stage('Compile/Build') {
+                    common.compile()
                 }
             }
              
-
             stage ('Test Execution') {
                 common.testcases()
             }
