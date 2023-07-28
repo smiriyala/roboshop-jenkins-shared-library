@@ -11,7 +11,7 @@ def call() {
     }
 
     if (env.TAG_NAME ==~ ".*"){
-        evn.GTAG = "true"
+        env.GTAG = "true"
     }
 
     node('workstation') {
