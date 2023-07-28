@@ -1,7 +1,7 @@
 // //BUILD Strategy to Achieve is : COMBILE, UNITTEST, PACKAGE, CODE QUALITY, ARTIFACTS. 
 //  MAIN    ==== CHECKOUT
-//  BRANCH  ==== CHECKOUT,COMPILE,UNIT TESTS,
-//  TAG     ==== CHECKOUT,COMBILE, PACKAGE, ARTIFACTS
+//  BRANCH  ==== CHECKOUT,COMPILE, UNIT TESTS,
+//  TAG     ==== CHECKOUT,COMBILE, PACKAGE ARTIFACTS
 //  PR      ==== CHECKOUT,COMPILE, UNITTEST, CODE QUALITY
 
 def call() {
@@ -36,6 +36,15 @@ def call() {
             if (env.BRANCH_NAME ==~ "PR-.*"){
                 stage('Code Quality') {
                     common.codequality()
+                }
+            }
+
+            if (env.GTAG == "true") {
+                stage ('Package') {
+                    common.testcases()
+                }
+                stage ('Artifact Upload') {
+                    common.testcases()
                 }
             }
      
