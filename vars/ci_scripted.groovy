@@ -10,7 +10,7 @@ def call() {
         env.sonar_extra_opts = ""
     }
 
-    IF (env.TAG_NAME ==~ ".*"){
+    if (env.TAG_NAME ==~ ".*"){
         evn.GTAG = "true"
     }
 
