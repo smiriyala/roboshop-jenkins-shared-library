@@ -33,7 +33,7 @@ def call() {
                 }
             }
             
-            if (env.BRANCH_NAME ==~ "PR-.*"){
+            if (env.BRANCH_NAME ==~ "PR-.*") {
                 stage('Code Quality') {
                     common.codequality()
                 }
@@ -41,7 +41,7 @@ def call() {
 
             if (env.GTAG == "true") {
                 stage ('Package') {
-                    common.prepareArtifacts() {
+                    common.prepareArtifacts() 
                 }
                 stage ('Artifact Upload') {
                     common.artifactUpload()
