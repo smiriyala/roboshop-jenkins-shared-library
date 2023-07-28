@@ -1,7 +1,17 @@
+// //BUILD Strategy to Achieve is : COMBILE, UNITTEST, PACKAGE, CODE QUALITY, ARTIFACTS. 
+//  MAIN    ==== COMPILE.
+//  BRANCH  ==== COMPILE,UNIT TESTS,
+//  TAG     ==== COMBILE, PACKAGE, ARTIFACTS
+//  PR      ==== COMPILE, UNITTEST, CODE QUALITY
+
 def call() {
 
     if (!env.sonar_extra_opts) {
         env.sonar_extra_opts = ""
+    }
+
+    IF (env.TAG_NAME ==~ ".*"){
+        evn.GTAG = "true"
     }
 
     node('workstation') {
@@ -16,11 +26,13 @@ def call() {
                     common.compile()
                 }
             }
-             
-            stage ('Test Execution') {
-                common.testcases()
+            
+            if (env.GTAG != "true" && env.BRANCH_NAME != "main") {
+                stage ('Test Execution') {
+                    common.testcases()
+                }
             }
-
+            
             stage('Code Quality') {
                 common.codequality()
             }
