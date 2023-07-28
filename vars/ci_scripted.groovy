@@ -18,7 +18,7 @@ def call() {
         try{
             stage('Checkout Code') {
                 cleanWs()
-                git branch: 'main' , url: 'https://github.com/smiriyala/cart'
+                git branch: 'main' , url: "https://github.com/smiriyala/${component}"
             }
 
             if (env.BRANCH_NAME != "main") {
@@ -41,10 +41,11 @@ def call() {
 
             if (env.GTAG == "true") {
                 stage ('Package') {
-                    common.testcases()
+                    common.prepareArtifacts() {
+()
                 }
                 stage ('Artifact Upload') {
-                    common.testcases()
+                    common.artifactUpload()
                 }
             }
      

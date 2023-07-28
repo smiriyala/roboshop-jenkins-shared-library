@@ -35,6 +35,28 @@ def codequality() {
 }
 
 
+def prepareArtifacts() {
+    // created version file which goes inside build folder and automatically included in artifact
+    sh 'echo ${TAG_NAME} >VERSION'
+
+    // here we are checking the app_lang variable  to check what to be included -x Jenkinsfile to exclude from zip
+    if (app_lang == "nodejs" || app_lang == "angular")  {
+        sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
+    }
+
+}
+
+def artifactUpload() {
+    // created version file which goes inside build folder and automatically included in artifact
+    sh 'echo ${TAG_NAME} >VERSION'
+
+    // here we are checking the app_lang variable  to check what to be included -x Jenkinsfile to exclude from zip
+    if (app_lang == "nodejs" || app_lang == "angular")  {
+        sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://3.95.178.181:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+    }
+
+}
+
 
 
 
