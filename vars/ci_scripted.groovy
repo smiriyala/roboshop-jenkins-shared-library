@@ -42,7 +42,6 @@ def call() {
             if (env.GTAG == "true") {
                 stage ('Package') {
                     common.prepareArtifacts() {
-()
                 }
                 stage ('Artifact Upload') {
                     common.artifactUpload()
