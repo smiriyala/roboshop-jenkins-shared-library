@@ -6,7 +6,7 @@ def compile() {
      sh 'npm install --no-fund'
     }
     if(app_lang == "maven"){
-        sh 'mvn package'
+        sh 'mvn clean package ; mv target/${component}-1.0.jar ${component}.jar'
     }
 }
 
@@ -40,8 +40,12 @@ def prepareArtifacts() {
     sh 'echo ${TAG_NAME} >VERSION'
 
     // here we are checking the app_lang variable  to check what to be included -x Jenkinsfile to exclude from zip
-    if (app_lang == "nodejs" || app_lang == "angular")  {
+    if (app_lang == "nodejs" || app_lang == "angular" || app_lang == "python" || app_lang == "golang")  {
         sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
+    }
+    //shipping app is maven, using jar file instead of zipping all
+    if (app_lang == "maven")  {
+        sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar VERSION'
     }
 
 }
