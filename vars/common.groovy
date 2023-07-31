@@ -55,9 +55,9 @@ def artifactUpload() {
     sh 'echo ${TAG_NAME} >VERSION'
 
     // here we are checking the app_lang variable  to check what to be included -x Jenkinsfile to exclude from zip
-    if (app_lang == "nodejs" || app_lang == "angular")  {
+    // if (app_lang == "nodejs" || app_lang == "angular")  {
         sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://44.201.154.82:8081/repository/${component}/${component}-${TAG_NAME}.zip'
-    }
+    // }
 
 }
 
