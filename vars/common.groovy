@@ -43,9 +43,9 @@ def prepareArtifacts() {
     if (app_lang == "nodejs" || app_lang == "angular" || app_lang == "python" || app_lang == "golang")  {
         sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
     }
-    //shipping app is maven, using jar file instead of zipping all
+    //shipping app is maven, using jar file instead of zipping all, schema added
     if (app_lang == "maven")  {
-        sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar VERSION'
+        sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar schema VERSION'
     }
 
 }
@@ -56,7 +56,7 @@ def artifactUpload() {
 
     // here we are checking the app_lang variable  to check what to be included -x Jenkinsfile to exclude from zip
     // if (app_lang == "nodejs" || app_lang == "angular")  {
-        sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://44.201.154.82:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+        sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://44.201.250.69:8081/repository/${component}/${component}-${TAG_NAME}.zip'
     // }
 
 }
