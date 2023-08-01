@@ -51,13 +51,24 @@ def prepareArtifacts() {
 }
 
 def artifactUpload() {
-    // created version file which goes inside build folder and automatically included in artifact
-    sh 'echo ${TAG_NAME} >VERSION'
+    
+    // // created version file which goes inside build folder and automatically included in artifact
+    // sh 'echo ${TAG_NAME} >VERSION'
 
-    // here we are checking the app_lang variable  to check what to be included -x Jenkinsfile to exclude from zip
-    // if (app_lang == "nodejs" || app_lang == "angular")  {
-        sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://44.201.250.69:8081/repository/${component}/${component}-${TAG_NAME}.zip'
-    // }
+    // // here we are checking the app_lang variable  to check what to be included -x Jenkinsfile to exclude from zip
+    // // if (app_lang == "nodejs" || app_lang == "angular")  {
+    //     sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://44.201.250.69:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+    // // }
+
+    //NEW CODE TO PASSWORD MASKING PLUIGIN IN JENKINS.
+    env.NEXUS_USER = sh ( script: 'aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
+    env.NEXUS_PASS = sh ( script: 'aws ssm get-parameter --name prod.nexus.pass --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
+    wrap([$class: 'MaskPasswordsBuildWrapper',
+       varPasswordPairs: [[password: NEXUS_PASS],[password: NEXUS_USER]]]) {
+        sh 'echo ${TAG_NAME} >VERSION'
+        sh 'curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file ${component}-${TAG_NAME}.zip http://44.201.250.69:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+
+    }
 
 }
 
