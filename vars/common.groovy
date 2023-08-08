@@ -51,7 +51,7 @@ def prepareArtifacts() {
     //     sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar schema VERSION'
     // }
 
-    sh 'docker build -t 934235628328.dkr.ecr.us-east-1.amazonaws.com/${component}-${TAG_NAME} .'
+    sh 'docker build -t 934235628328.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} .'
 
 
 }
@@ -84,8 +84,3 @@ def artifactUpload() {
     sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 934235628328.dkr.ecr.us-east-1.amazonaws.com'
     sh 'docker push 934235628328.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME}'
 }
-
-
-
-
-
