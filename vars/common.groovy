@@ -51,6 +51,8 @@ def prepareArtifacts() {
     //     sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar schema VERSION'
     // }
 
+
+    // This part is aws ECR key: 934235628328.dkr.ecr.us-east-1.amazonaws.com which is different to each service.
     sh 'docker build -t 934235628328.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} .'
 
 
